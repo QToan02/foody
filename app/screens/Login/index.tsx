@@ -1,7 +1,7 @@
+import { useCallback, useEffect } from 'react'
 import { Alert, Button, StyleSheet, View } from 'react-native'
 import { useForm } from 'react-hook-form'
-import { Input } from 'components'
-import { useCallback, useEffect } from 'react'
+import { Input } from '@components'
 
 type FormData = Record<string, unknown>
 
