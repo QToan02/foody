@@ -2,6 +2,7 @@ import { useCallback, useEffect } from 'react'
 import { Alert, Button, StyleSheet, View } from 'react-native'
 import { useForm } from 'react-hook-form'
 import { Input } from '@components'
+import { REGEX } from '@constants'
 
 type FormData = Record<string, unknown>
 
@@ -38,7 +39,7 @@ const LoginScreen = () => {
         rules={{
           required: 'Email is required',
           pattern: {
-            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g,
+            value: REGEX.EMAIl,
             message: 'Email not in the right format',
           },
         }}
