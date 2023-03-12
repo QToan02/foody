@@ -1,8 +1,9 @@
 import { useCallback, useEffect } from 'react'
-import { Alert, Button, StyleSheet, View } from 'react-native'
+import { Alert, Image, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { useForm } from 'react-hook-form'
-import { Input } from '@components'
-import { REGEX } from '@constants'
+import { CButton, CText, Input } from '@components'
+import { usePasswordVisibility } from '@hooks'
+import { COLORS, REGEX } from '@constants'
 
 type FormData = Record<string, unknown>
 
@@ -18,6 +19,7 @@ const LoginScreen = () => {
       password: '',
     },
   })
+  const { visibility, icon, handlePasswordVisibility } = usePasswordVisibility()
 
   const onSubmit = useCallback((data: FormData) => {
     Alert.alert(JSON.stringify(data))
@@ -31,10 +33,14 @@ const LoginScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Image style={styles.logo} source={require('@assets/images/c1.png')} />
+      <Image style={styles.logo} source={require('@assets/images/c2.svg')} />
+      <Image style={styles.logo} source={require('@assets/images/c3.svg')} />
+      <CText customStyle={styles.heading} content="Login" />
       <Input
-        label="Email"
+        label="E-mail"
         name="email"
-        placeholder="Enter email"
+        placeholder="Your email or phone"
         control={control}
         rules={{
           required: 'Email is required',
@@ -47,9 +53,11 @@ const LoginScreen = () => {
       <Input
         label="Password"
         name="password"
-        placeholder="Enter password"
+        placeholder="Password"
         control={control}
-        secureTextEntry
+        secureTextEntry={visibility}
+        icon={icon}
+        onShowPassword={handlePasswordVisibility}
         rules={{
           required: 'Password is required',
           minLength: {
@@ -62,7 +70,16 @@ const LoginScreen = () => {
           },
         }}
       />
-      <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+      <TouchableOpacity style={styles.spacing} activeOpacity={0.5}>
+        <CText content="Forgot password?" customStyle={styles.desc} />
+      </TouchableOpacity>
+      <CButton title="login" onPress={handleSubmit(onSubmit)} />
+      <View style={[styles.spacing, styles.display]}>
+        <CText content="Don't have an account? " customStyle={[styles.desc, styles.descBlack]} />
+        <TouchableOpacity activeOpacity={0.5}>
+          <CText content="Sign up" customStyle={styles.desc} />
+        </TouchableOpacity>
+      </View>
     </View>
   )
 }
@@ -71,8 +88,36 @@ export default LoginScreen
 
 const styles = StyleSheet.create({
   container: {
+    position: 'relative',
     flex: 1,
     width: '80%',
     justifyContent: 'center',
+  },
+  heading: {
+    fontSize: 37,
+    fontWeight: 'bold',
+    lineHeight: 44,
+  },
+  spacing: {
+    marginTop: 20,
+  },
+  display: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
+  desc: {
+    color: COLORS.ORANGE,
+    textAlign: 'center',
+    fontWeight: '600',
+    lineHeight: 14,
+  },
+  descBlack: {
+    color: COLORS.BLACK,
+  },
+  logo: {
+    position: 'absolute',
+    top: -110,
+    left: 15,
   },
 })
