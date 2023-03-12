@@ -1,8 +1,15 @@
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
 import { LoginScreen } from '@screens'
+import { useFonts } from 'expo-font'
 
-export default function App() {
+const App = () => {
+  const [loaded] = useFonts({
+    Sofia: require('./assets/fonts/sofiapro-light.ttf'),
+  })
+
+  if (!loaded) return null
+
   return (
     <View style={styles.container}>
       <LoginScreen />
@@ -19,3 +26,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
+
+export default App
