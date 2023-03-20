@@ -30,6 +30,7 @@ export default memo(CButton)
 
 const styles = StyleSheet.create({
   button: {
+    alignSelf: 'center',
     marginVertical: 32,
     borderRadius: 40,
     borderWidth: 2,
@@ -47,8 +48,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: COLORS.WHITE,
     textAlign: 'center',
-    paddingVertical: 25,
-    paddingHorizontal: 75,
+    paddingVertical: 15,
+    paddingHorizontal: 100,
   },
   contentBlack: {
     color: COLORS.BLACK,

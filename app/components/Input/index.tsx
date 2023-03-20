@@ -27,13 +27,14 @@ const Input = ({ name, control, rules = {}, label, secureTextEntry, placeholder,
           <>
             <View style={[styles.inputContainer, { borderColor: error ? 'red' : COLORS.GRAY }]}>
               <TextInput
+                style={styles.input}
                 value={value}
                 placeholder={placeholder}
                 onChangeText={onChange}
                 onBlur={onBlur}
                 secureTextEntry={secureTextEntry}
               />
-              <Pressable onPress={onShowPassword}>
+              <Pressable style={styles.iconContainer} onPress={onShowPassword}>
                 <MaterialCommunityIcons name={icon} size={22} color={COLORS.ICON_GRAY} />
               </Pressable>
             </View>
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   inputContainer: {
+    position: 'relative',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -63,11 +65,18 @@ const styles = StyleSheet.create({
     borderColor: COLORS.GRAY,
     borderWidth: 1,
     borderRadius: 5,
+  },
+  input: {
+    width: '100%',
     padding: 10,
   },
   errorMessage: {
     color: 'red',
     fontWeight: '600',
     alignSelf: 'stretch',
+  },
+  iconContainer: {
+    position: 'absolute',
+    right: 10,
   },
 })
