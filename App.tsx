@@ -1,7 +1,7 @@
-import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View } from 'react-native'
-import { LoginScreen } from '@screens'
 import { useFonts } from 'expo-font'
+import { NavigationContainer } from '@react-navigation/native'
+import { RootNavigator } from '@navigation'
 
 const App = () => {
   const [loaded] = useFonts({
@@ -11,9 +11,10 @@ const App = () => {
   if (!loaded) return null
 
   return (
-    <View style={styles.container}>
-      <LoginScreen />
-      <StatusBar style="auto" />
+    <View style={styles.container} onLayout={onLayoutRootView}>
+      <NavigationContainer>
+        <RootNavigator />
+      </NavigationContainer>
     </View>
   )
 }
@@ -21,9 +22,6 @@ const App = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 })
 

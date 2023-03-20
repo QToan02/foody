@@ -16,6 +16,7 @@ module.exports = function (api) {
             '@utils': './app/utils',
             '@types': './app/types',
             '@hooks': './app/hooks',
+            '@navigation': './app/navigation',
           },
         },
       ],

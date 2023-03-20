@@ -11,7 +11,8 @@
       "@constants/*": ["app/constants/*"],
       "@utils/*": ["app/utils/*"],
       "@types/*": ["app/types/*"],
-      "@hooks/*": ["app/hooks/*"]
+      "@hooks/*": ["app/hooks/*"],
+      "@navigation/*": ["app/navigation/*"]
     }
   }
 }
