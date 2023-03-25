@@ -7,6 +7,7 @@ import { usePasswordVisibility } from '@hooks'
 import { COLORS, REGEX } from '@constants'
 import { Svg, Image } from 'react-native-svg'
 import { RootStackParamList } from '@navigation/Root'
+import { signUp } from '@services'
 
 type FormData = Record<string, unknown>
 type Props = NativeStackScreenProps<RootStackParamList, 'Register'>
@@ -19,7 +20,7 @@ const RegisterScreen = ({ navigation }: Props) => {
     formState: { isSubmitSuccessful },
   } = useForm<FormData>({
     defaultValues: {
-      fullName: '',
+      username: '',
       email: '',
       password: '',
     },
@@ -28,15 +29,17 @@ const RegisterScreen = ({ navigation }: Props) => {
 
   const handleBackLogin = useCallback(() => navigation.navigate('Login'), [navigation])
 
-  const onSubmit = useCallback((data: FormData) => {
-    Alert.alert(JSON.stringify(data))
+  const onSubmit = useCallback(async (data: FormData) => {
+    await signUp(data)
+      .then(res => {
+        Alert.alert("Success", "Sign up successfully!",[
+          {text: 'OK', onPress: () => navigation.navigate('Login')},  
+        ])
+      })
+      .catch(error => {
+        Alert.alert("Failed", "Sign up failed!")
+      })
   }, [])
-
-  useEffect(() => {
-    if (isSubmitSuccessful) {
-      reset()
-    }
-  }, [isSubmitSuccessful, reset])
 
   return (
     <SafeAreaView style={styles.center}>
@@ -46,8 +49,8 @@ const RegisterScreen = ({ navigation }: Props) => {
         </Svg>
         <CText customStyle={styles.heading} content="Sign up" />
         <Input
-          label="Full name"
-          name="fullName"
+          label="Username"
+          name="username"
           placeholder="Enter your name"
           control={control}
           rules={{

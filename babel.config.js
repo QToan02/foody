@@ -17,6 +17,8 @@ module.exports = function (api) {
             '@types': './app/types',
             '@hooks': './app/hooks',
             '@navigation': './app/navigation',
+            '@services': './app/services',
+            '@redux': './app/redux'
           },
         },
       ],

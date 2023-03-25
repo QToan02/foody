@@ -4,6 +4,9 @@ import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen'
 import { NavigationContainer } from '@react-navigation/native'
 import { RootNavigator } from '@navigation'
+import { Provider } from 'react-redux'
+import { store } from '@redux/store'
+
 
 const App = () => {
   const [loaded] = useFonts({
@@ -19,11 +22,13 @@ const App = () => {
   if (!loaded) return null
 
   return (
-    <View style={styles.container} onLayout={onLayoutRootView}>
-      <NavigationContainer>
-        <RootNavigator />
-      </NavigationContainer>
-    </View>
+    <Provider store={store}>
+      <View style={styles.container} onLayout={onLayoutRootView}>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </View>
+    </Provider>
   )
 }
 
