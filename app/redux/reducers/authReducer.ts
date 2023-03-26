@@ -7,7 +7,7 @@ export type AuthStateType = {
 
 export const authState: AuthStateType = {
     isLoading: true,
-    isAuthenticated: true,
+    isAuthenticated: false,
 }
 
 export const authReducer = (state: AuthStateType = authState, action: any) => {

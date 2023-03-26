@@ -18,6 +18,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 const RootNavigator = () => {
 
   const {isAuthenticated} = useSelector((state: RootState)=> state.authReducer)
+  const {isSplashShow} = useSelector((state: RootState) => state.systemReducer)
   const dispatch = useDispatch()
 
   const getUserData = async () => {
@@ -40,7 +41,7 @@ const RootNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={setScreenOpt}>
-      {/* <Stack.Screen name="Splash" component={SplashScreen} /> */}
+      {isSplashShow && <Stack.Screen name="Splash" component={SplashScreen} />}
       {isAuthenticated ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} options={{ animation: 'slide_from_right' }} />
