@@ -1,0 +1,41 @@
+import { useCallback } from 'react'
+import { StyleSheet, View } from 'react-native'
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen'
+import { NavigationContainer } from '@react-navigation/native'
+import { RootNavigator } from '@navigation'
+import { Provider } from 'react-redux'
+import { store } from '@redux/store'
+
+
+const App = () => {
+  const [loaded] = useFonts({
+    Sofia: require('./assets/fonts/sofiapro-light.ttf'),
+  })
+
+  const onLayoutRootView = useCallback(async () => {
+    if (loaded) {
+      await SplashScreen.hideAsync()
+    }
+  }, [loaded])
+
+  if (!loaded) return null
+
+  return (
+    <Provider store={store}>
+      <View style={styles.container} onLayout={onLayoutRootView}>
+        <NavigationContainer>
+          <RootNavigator />
+        </NavigationContainer>
+      </View>
+    </Provider>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+})
+
+export default App
